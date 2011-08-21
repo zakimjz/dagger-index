@@ -33,6 +33,6 @@ Checks the folders in _Scripts/depo/_ and creates the table to be plotted. If ba
 Given _abc.tt_ , it produces _abc.tt.eps_ and _abc.tt.jpg_ . The second argument is the max value in x axis...
 *Sample usage:* {{{sh qpuPlot.sh abc.tt 20}}}
 
-=== qpuPlot-bw.sh ===
+=== qpuPlotbw.sh ===
 
 Same with qpuPlot except this one only uses black lines with different line styles.                                                                                       
