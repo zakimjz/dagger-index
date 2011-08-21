@@ -9,6 +9,6 @@ The package is available as a compressed *DAGGER* folder in [http://code.google.
       * *erGenerator*: Generates a random graph in Erdos-Renyi Model.
       * *baGenerator*: Generates a random graph in Barabasi-Albert Model.
   # *testGenerator*: Given an input graph, it generates a random sequence of valid update operations which can be used to evaluate reachability indices.
-  # *Graph Extractors*:
+  # *Graph Extractors*: These extracts an input(i.e., initial) graph from a list of updates and outputs in .gra format.
       * *graphExtractorFromPairs*:
       * *graphExtractor*:
