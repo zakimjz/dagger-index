@@ -30,24 +30,24 @@ At the end it outputs the total time and particular update time averages.
 Usage:
 {{{./DGRAIL -g <grafile> -t <updatefile> -qpu <queriesperupdate> -type [mg | bmg | dfs | bfs] -dim <#dims>}}}
 
-Example DFS RUN:
+*Example DFS RUN*:
 
 {{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type dfs -qpu 5}}}
    * No index is used and queries are answered by DFS. For each update in the input
 graph, 5 random queries are generated and answered.
 
-Example BFS RUN:
+*Example BFS RUN*:
 
 {{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bfs -qpu 5}}}
    * No index is used and queries are answered by BFS. For each update in the input graph, 5 random queries are generated and answered.
 
-Example DAGGER RUN with DFS Search:
+*Example DAGGER RUN with DFS Search*:
 
 {{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type mg -dim 1 -qpu 5}}}
    * DAGGER with 1 interval label per node. For each update in the input
 graph, 5 random queries are generated and answered. Queries are answered by pruned DFS search. If -dim 0 is set as the dimensionality, then the index maintains no labels so it will be basically DFS search on the DAG graph (instead of the input graph).
 
-Example DAGGER RUN with BFS Search:
+*Example DAGGER RUN with BFS Search*:
 
 {{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bmg -dim 1 -qpu 5}}}
    * DAGGER with 1 interval label per node. For each update in the input
