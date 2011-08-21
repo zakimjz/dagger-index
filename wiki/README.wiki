@@ -22,6 +22,50 @@ Example: _ulimit -s 200000
 
 == Usage ==
 
+=== RUNNING DAGGER on a graph and update file  ====
+It prints the input graph statistics at the beginning and at the end of the simulation.
+(e.g. #nodes, #edges, #dagnodes, size of largest SCC)
+At the end it outputs the total time and particular update time averages.
+
+Usage:
+{{{./DGRAIL -g <grafile> -t <updatefile> -qpu <queriesperupdate> -type [mg | bmg | dfs | bfs] -dim <#dims>}}}
+
+Example DFS RUN:
+
+{{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type dfs -qpu 5}}}
+   * No index is used and queries are answered by DFS. For each update in the input
+graph, 5 random queries are generated and answered.
+
+Example BFS RUN:
+
+{{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bfs -qpu 5}}}
+   * No index is used and queries are answered by BFS. For each update in the input graph, 5 random queries are generated and answered.
+
+Example DAGGER RUN with DFS Search:
+
+{{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type mg -dim 1 -qpu 5}}}
+   * DAGGER with 1 interval label per node. For each update in the input
+graph, 5 random queries are generated and answered. Queries are answered by pruned DFS search. If -dim 0 is set as the dimensionality, then the index maintains no labels so it will be basically DFS search on the DAG graph (instead of the input graph).
+
+Example DAGGER RUN with BFS Search:
+
+{{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bmg -dim 1 -qpu 5}}}
+   * DAGGER with 1 interval label per node. For each update in the input
+graph, 5 random queries are generated and answered. Queries are answered by pruned BFS search. If -dim 0 is set as the dimensionality, then the index maintains no labels so it will be basically BFS search on the DAG graph (instead of the input graph).
+
+If you want to process the first N lines of the update file, use -n N in the args.
+
+=== TESTING CORRECTNESS ===
+You can check the correctness of the index, anytime you doubt. It has
+the same usage with DGRAIL. It compares the result of each query with
+the result of the plain DFS search. It halts with an error message if
+a mismatch occurs, otherwise it terminates with "Exiting..." line.
+
+Usage:
+{{{./correctness -g <grafile> -t <updatefile> -qpu <queriesperupdate> -type mg -dim 2}}}
+
+It is better to give high {{{<queriesperupdate>}}} value if the number of updates is small...
+
 === GRAPH GENERATION ===
 
 We have 3 graph generators that can be used to generate million node graphs:
@@ -82,48 +126,3 @@ Example Usage:
 {{{./graphExtractor -g abc.text -n 1000 -t outfile.gra}}}
 
 The output gra is saved into outfile.gra
-
-
-=== TESTING CORRECTNESS ===
-You can check the correctness of the index, anytime you doubt. It has
-the same usage with DGRAIL. It compares the result of each query with
-the result of the plain DFS search. It halts with an error message if
-a mismatch occurs, otherwise it terminates with "Exiting..." line.
-
-Usage:
-{{{./correctness -g <grafile> -t <updatefile> -qpu <queriesperupdate> -type mg -dim 2}}}
-
-It is better to give high {{{<queriesperupdate>}}} value if the number of updates is small...
-
-==== RUNNING DAGGER on a graph and update file  =====
-It prints the input graph statistics at the beginning and at the end of the simulation.
-(e.g. #nodes, #edges, #dagnodes, size of largest SCC)
-At the end it outputs the total time and particular update time averages.
-
-Usage:
-{{{./DGRAIL -g <grafile> -t <updatefile> -qpu <queriesperupdate> -type [mg | bmg | dfs | bfs] -dim <#dims>}}}
-
-Example DFS RUN:
-
-{{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type dfs -qpu 5}}}
-   * No index is used and queries are answered by DFS. For each update in the input
-graph, 5 random queries are generated and answered.
-
-Example BFS RUN:
-
-{{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bfs -qpu 5}}}
-   * No index is used and queries are answered by BFS. For each update in the input graph, 5 random queries are generated and answered.
-
-Example DAGGER RUN with DFS Search:
-
-{{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type mg -dim 1 -qpu 5}}}
-   * DAGGER with 1 interval label per node. For each update in the input
-graph, 5 random queries are generated and answered. Queries are answered by pruned DFS search. If -dim 0 is set as the dimensionality, then the index maintains no labels so it will be basically DFS search on the DAG graph (instead of the input graph).
-
-Example DAGGER RUN with BFS Search:
-
-{{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bmg -dim 1 -qpu 5}}}
-   * DAGGER with 1 interval label per node. For each update in the input
-graph, 5 random queries are generated and answered. Queries are answered by pruned BFS search. If -dim 0 is set as the dimensionality, then the index maintains no labels so it will be basically BFS search on the DAG graph (instead of the input graph).
-
-If you want to process the first N lines of the update file, use -n N in the args.
