@@ -2,7 +2,7 @@
 
 == Contents ==
 The package is available as a compressed folder in [http://code.google.com/p/dagger-index/downloads/list Downloads] and as individual files in [http://code.google.com/p/dagger-index/source/checkout
-Source].
+ Source].
 
 = Details =
 
