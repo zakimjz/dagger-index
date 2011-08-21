@@ -5,7 +5,8 @@ In _Scripts_ folder there will be 4 scripts:
   # runMethod.sh
   # extractTotalTime.sh
   # qpuPlot.sh
-  # qpuPlot-bw.sh
+  # qpuPlotbw.sh
+  # example.sh
 
 === runMethod.sh ===
 {{{sh runMethod.sh <grafile> <updatefile>}}}
@@ -36,3 +37,6 @@ Given _abc.tt_ , it produces _abc.tt.eps_ and _abc.tt.jpg_ . The second argument
 === qpuPlotbw.sh ===
 
 Same with qpuPlot except this one only uses black lines with different line styles.                                                                                       
+
+=== example.sh ===
+An example of running the above scripts...
