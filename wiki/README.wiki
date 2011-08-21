@@ -39,12 +39,13 @@ with -d flag. It picks a random number from 1 to 2*avgdeg for each node,
 and creates that many edges.
 It outputs the generated gra file in out.gra
 
-====== UPDATE FILE GENERATION ========
+=== UPDATE FILE GENERATION ===
 
 We need to generate test file (update file) for testing an index.
 
 Usage:
-./testGenerator -g <grafile> -n <#updates> [-pie | -pin | -pde | -pdn]
+
+{{{./testGenerator -g <grafile> -n <#updates> [-pie | -pin | -pde | -pdn]}}}
 
 It creates n lines of update operations on a given graph. By default it generates a mixed workload
    -60% : insert edge
@@ -62,24 +63,27 @@ By default, edge insertions are preferential attachment. But it can be
 set to ER if you give "-imode 0" to the program.
 The program outputs to standard output.
 
-==== GRAPH EXTRACTORS =====================
+=== GRAPH EXTRACTORS ===
 
-i) graphExtractorFromPairs
+  * graphExtractorFromPairs
         Given a timestamp sorted edge lists (each line has 2 nodes),
 it creates a gra file with first n lines and convert the remaining
 list into "add node" updates.
 
 Example Usage :
-./graphExtractorFromPairs -g abc.text -n 10000000
+
+{{{./graphExtractorFromPairs -g abc.text -n 10000000}}}
+
         It will create abc.text.gra with first 10M lines of abc.text
 and the remaining lines will be converted to update
 operations written in abc.text.gra.up
 
-ii) graphExtractor
+   * graphExtractor
 Given an update list, it creates a gra file with first n line.
 Example Usage:
 
-./graphExtractor -g abc.text -n 1000 -t outfile.gra
+{{{./graphExtractor -g abc.text -n 1000 -t outfile.gra}}}
+
         The output gra is saved into outfile.gra
 
 
