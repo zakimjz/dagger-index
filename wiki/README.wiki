@@ -3,12 +3,12 @@
 == Contents == 
 The package is available as a compressed *DAGGER* folder in [http://code.google.com/p/dagger-index/downloads/list Downloads] and as browsable files in [http://code.google.com/p/dagger-index/source/browse Source]. Once compiled, the package provides the following executables:
 
-  # DGRAIL: The main executable which evaluates the performance of DAGGER, DFS or BFS on a given input graph and an _update file_ (a file that lists the changes to be applied to the graph).
-  # correctness: It checks the correctness of DAGGER/DFS/BFS by comparing the result of each query on a given input graph and update file.
-  # Graph Generators:
-      * erGenerator:
-      * baGenerator:
-  # testGenerator:
-  # Graph Extractors:
-      * graphExtractorFromPairs:
-      * graphExtractor:
+  # *DGRAIL*: The main executable which evaluates the performance of DAGGER, DFS or BFS on a given input graph and an _update file_ (a file that lists the changes to be applied to the graph).
+  # *correctness*: It checks the correctness of DAGGER/DFS/BFS by comparing the result of each query on a given input graph and update file.
+  # *Graph Generators*:
+      * *erGenerator*:
+      * *baGenerator*:
+  # *testGenerator*:
+  # *Graph Extractors*:
+      * *graphExtractorFromPairs*:
+      * *graphExtractor*:
