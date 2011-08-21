@@ -1,0 +1,141 @@
+/* DAGGER - A Scalable Reachability Index For Dynamic Graphs
+Copyright (C) 2011 Hilmi Yildirim.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/ */
+
+====== GRAPH GENERATION =========
+
+We have 3 graph generators that can be used to generate million node graphs:
+./erGenerator -n <graphsize> -d <avg_degree>          : generates erdos-renyi
+./baGenerator -n <graphsize> -d <avg_degree>          : generates albert-barabasi (DAG) 
+./baGenerator -n <graphsize> -d <avg_degree>  -bidir  : generates albert-barabasi (nondag)
+
+They print some messages to std err to let you know 
+about the progress. erGenerator is fast, but 
+baGenerator takes some time. 
+Default value of average degree is 4. You can set it to another value
+with -d flag. It picks a random number from 1 to 2*avgdeg for each node, 
+and creates that many edges.
+It outputs the generated gra file in out.gra
+
+====== UPDATE FILE GENERATION ========
+
+We need to generate test file (update file) for testing an index.
+
+Usage:
+./testGenerator -g <grafile> -n <#updates> [-pie | -pin | -pde | -pdn]
+
+It creates n lines of update operations on a given graph. By default it generates a mixed workload
+   -60% : insert edge
+   -20% : insert node
+   -15% : delete edge
+   -5%  : delete node
+
+However it is possible to generate pure workloads with the optional flags:
+ -pie : only edge insertions
+ -pin : only node insertions
+ -pde : only edge deletions
+ -pdn : only node deletions
+
+By default, edge insertions are preferential attachment. But it can be 
+set to ER if you give "-imode 0" to the program.
+The program outputs to standard output.
+
+==== GRAPH EXTRACTORS =====================
+ 
+i) graphExtractorFromPairs
+        Given a timestamp sorted edge lists (each line has 2 nodes), 
+it creates a gra file with first n lines and convert the remaining 
+list into "add node" updates. 
+
+Example Usage :
+./graphExtractorFromPairs -g abc.text -n 10000000
+	It will create abc.text.gra with first 10M lines of abc.text 
+and the remaining lines will be converted to update 
+operations written in abc.text.gra.up
+
+ii) graphExtractor
+Given an update list, it creates a gra file with first n line.
+Example Usage: 
+
+./graphExtractor -g abc.text -n 1000 -t outfile.gra
+	The output gra is saved into outfile.gra
+ 
+
+===== TESTING CORRECTNESS =================
+You can check the correctness of the index, anytime you doubt. It has
+the same usage with DGRAIL. It compares the result of each query with
+the result of the plain DFS search. It halts with an error message if
+a mismatch occurs, otherwise it terminates with "Exiting" line.
+
+Usage:
+./correctness -g <grafile> -t <updatefile> -qpu <queriesperupdate> -type mg -dim 2
+
+It is better to give high <queriesperupdate> value if the number of updates is small...
+
+===== RUNNING DAGGER on a graph and update file  ===================
+It prints the input graph statistics at the beginning and 
+at the end of the simulation. 
+(e.g. #nodes, #edges, #dagnodes, size of largest SCC)
+At the end it outputs the total time and particular update time averages.
+
+Usage: 
+./DGRAIL -g <grafile> -t <updatefile> -qpu <queriesperupdate> -type [mg | bmg | dfs | bfs] -dim <#dims>
+
+Example DFS RUN:
+./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type dfs -qpu 5
+ -- No index is used and queries are answered by DFS. For each update in the input
+graph, 5 random queries are generated and answered.
+
+Example BFS RUN:
+./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bfs -qpu 5
+ -- No index is used and queries are answered by BFS. For each update in the input
+graph, 5 random queries are generated and answered.
+
+Example DAGGER RUN with DFS Search:
+./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type mg -dim 1 -qpu 5
+ -- DAGGER with 1 interval label per node. For each update in the input
+graph, 5 random queries are generated and answered. Queries are answered by
+pruned DFS search. If -dim 0 is set as the dimensionality, then the index maintains
+no labels so it will be basically DFS search on the DAG graph (instead of the input graph).
+
+
+Example DAGGER RUN with BFS Search:
+./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bmg -dim 1 -qpu 5
+ -- DAGGER with 1 interval label per node. For each update in the input
+graph, 5 random queries are generated and answered. Queries are answered by
+pruned BFS search. If -dim 0 is set as the dimensionality, then the index maintains
+no labels so it will be basically BFS search on the DAG graph (instead of the input graph).
+
+If you want to process the first N lines of the update file, use -n N in the args.
+
+
+=======SCRIPTS ========================
+Attached three scripts to generate the plots of Total Time vs. QPU
+
+sh runMethod.sh <grafile> <updfile>
+- It runs DFS, DG0, DG1 and DG2 on the files for varying values of 1 to 20. (you can reduce the number of values for vary large values). It saves the outputs of DGRAIL in the folder depo : with suffixes that specify each run.
+An example run:
+sh runMethods.sh ../../abc.gra abc.update
+It will create the following files in the depo folder.
+abc_dfs_1 abc_dfs_2, ..., abc_dfs_20 abc_mg0_1 ... abc_mg0_20 ... abc_mg2_20
+
+    2. sh extractTotalTime.sh <basefilename>
+
+Checks the folders in depo and creates the table to be plotted. If basefilename is abc, it will read the files created in the previous example and saves the table in the file abc.tt
+
+   3. sh qpuPlot.sh <totaltimetablefile> <maxqpu>
+
+Given abc.tt , it produces abc.tt.eps and abc.tt.jpg . The second argument is the max value in x axis...
+Sample usage: sh qpuPlot.sh abc.tt 20
