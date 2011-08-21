@@ -14,4 +14,7 @@ The package is available as a compressed *DAGGER* folder in [http://code.google.
       * *graphExtractor*:
 
 == Installation ==
-A simple _make_ command in the folder would compile all the code as long as the c++ compiler supports the [http://en.wikipedia.org/wiki/C%2B%2B0x C++0x] standard. It is because of the dependency to the [http://en.wikipedia.org/wiki/Unordered_map_(C%2B%2B)hashmap]s.
+A simple _make_ command in the folder would compile all the code as long as the c++ compiler supports the [http://en.wikipedia.org/wiki/C%2B%2B0x C++0x] standard. It is because of the dependency to the [http://en.wikipedia.org/wiki/Unordered_map_(C%2B%2B) hashmap]s.
+
+Please note that in some very large input graphs DGRAIL may give segmentation fault due to stack overflow. The reason is that in a very highly connected graph, a DFS can go very deep during the search. You can overcome this problem by setting a higher stack size.
+Example: _ulimit -s 200000 
