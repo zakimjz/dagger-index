@@ -10,7 +10,7 @@ In _Scripts_ folder there will be 4 scripts:
 === runMethod.sh ===
 {{{sh runMethod.sh <grafile> <updatefile>}}}
 
-It runs DFS, DG0, DG1 and DG2 on the files for varying values of 1 to 8. (you can reduce the number of values for vary large values). It saves the outputs of DGRAIL in the folder _Scripts/depo/_ : with suffixes that specify each run.
+It runs DFS, DG0, DG1 and DG2 on the files for varying values of 1 to 8. (you can reduce the number of values for vary large graphs). It saves the outputs of DGRAIL in the folder _Scripts/depo/_ : with suffixes that specify each run.
 
 *An example run: *
 
