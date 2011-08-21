@@ -12,3 +12,6 @@ The package is available as a compressed *DAGGER* folder in [http://code.google.
   # *Graph Extractors*: These extracts an input(i.e., initial) graph from a list of updates and outputs in .gra format. The reason we need this tool is that in some cases updates are available from an empty graph but we want to simulate the evolution of the graph after some point. Therefore these tools apply the updates up to that point, output that graph in .gra format and also output the remaining updates as an update file.
       * *graphExtractorFromPairs*:
       * *graphExtractor*:
+
+== Installation ==
+A simple _make_ command in the folder would compile all the code as long as the c++ compiler supports the [http://en.wikipedia.org/wiki/C%2B%2B0x C++0x] standard. It is because of the dependency to the [http://en.wikipedia.org/wiki/Unordered_map_(C%2B%2B)hashmap]s.
