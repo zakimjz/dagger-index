@@ -1,7 +1,9 @@
 #summary Installation and Usage Instructions for DAGGER.
 
 == Contents == 
-The package is available as a compressed *DAGGER* folder in [http://code.google.com/p/dagger-index/downloads/list Downloads] and as browsable files in [http://code.google.com/p/dagger-index/source/browse Source].
+The package is available as a compressed *DAGGER* folder in [http://code.google.com/p/dagger-index/downloads/list Downloads] and as browsable files in [http://code.google.com/p/dagger-index/source/browse Source]. Once compiled, the package provides the following executables:
+
+  # DGRAIL: 
 
 = Details =
 
