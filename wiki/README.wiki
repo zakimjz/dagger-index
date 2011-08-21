@@ -22,10 +22,10 @@ Example: _ulimit -s 200000
 
 == Usage ==
 
-====== GRAPH GENERATION =========
+=== GRAPH GENERATION ===
 
 We have 3 graph generators that can be used to generate million node graphs:
-./erGenerator -n <graphsize> -d <avg_degree>          : generates erdos-renyi
+"./erGenerator -n <graphsize> -d <avg_degree>          ": generates erdos-renyi
 ./baGenerator -n <graphsize> -d <avg_degree>          : generates albert-barabasi (DAG)
 ./baGenerator -n <graphsize> -d <avg_degree>  -bidir  : generates albert-barabasi (nondag)
 
@@ -127,5 +127,3 @@ pruned BFS search. If -dim 0 is set as the dimensionality, then the index mainta
 no labels so it will be basically BFS search on the DAG graph (instead of the input graph).
 
 If you want to process the first N lines of the update file, use -n N in the args.
-
-
