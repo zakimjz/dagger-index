@@ -33,8 +33,7 @@ Usage:
 *Example DFS RUN*:
 
 {{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type dfs -qpu 5}}}
-   * No index is used and queries are answered by DFS. For each update in the input
-graph, 5 random queries are generated and answered.
+   * No index is used and queries are answered by DFS. For each update in the input graph, 5 random queries are generated and answered.
 
 *Example BFS RUN*:
 
@@ -50,16 +49,12 @@ graph, 5 random queries are generated and answered. Queries are answered by prun
 *Example DAGGER RUN with BFS Search*:
 
 {{{./DGRAIL -g samplegraphs/sample2.gra -t testfiles/mytest.test -type bmg -dim 1 -qpu 5}}}
-   * DAGGER with 1 interval label per node. For each update in the input
-graph, 5 random queries are generated and answered. Queries are answered by pruned BFS search. If -dim 0 is set as the dimensionality, then the index maintains no labels so it will be basically BFS search on the DAG graph (instead of the input graph).
+   * DAGGER with 1 interval label per node. For each update in the input graph, 5 random queries are generated and answered. Queries are answered by pruned BFS search. If -dim 0 is set as the dimensionality, then the index maintains no labels so it will be basically BFS search on the DAG graph (instead of the input graph).
 
 If you want to process the first N lines of the update file, use -n N in the args.
 
 === TESTING CORRECTNESS ===
-You can check the correctness of the index, anytime you doubt. It has
-the same usage with DGRAIL. It compares the result of each query with
-the result of the plain DFS search. It halts with an error message if
-a mismatch occurs, otherwise it terminates with "Exiting..." line.
+You can check the correctness of the index, anytime you doubt. It has the same usage with DGRAIL. It compares the result of each query with the result of the plain DFS search. It halts with an error message if a mismatch occurs, otherwise it terminates with "Exiting..." line.
 
 Usage:
 {{{./correctness -g <grafile> -t <updatefile> -qpu <queriesperupdate> -type mg -dim 2}}}
@@ -75,13 +70,7 @@ We have 3 graph generators that can be used to generate million node graphs:
 
    {{{./baGenerator -n <graphsize> -d <avg_degree>  -bidir}}}  : generates albert-barabasi (nondag)
 
-They print some messages to std err to let you know
-about the progress. erGenerator is fast, but
-baGenerator takes some time.
-Default value of average degree is 4. You can set it to another value
-with -d flag. It picks a random number from 1 to 2*avgdeg for each node,
-and creates that many edges.
-It outputs the generated gra file in out.gra
+They print some messages to std err to let you know about the progress. erGenerator is fast, but baGenerator takes some time. Default value of average degree is 4. You can set it to another value with -d flag. It picks a random number from 1 to 2*avgdeg for each node, and creates that many edges. It outputs the generated gra file in out.gra
 
 === UPDATE FILE GENERATION ===
 
@@ -103,26 +92,21 @@ However it is possible to generate pure workloads with the optional flags:
   * -pde : only edge deletions
   * -pdn : only node deletions
 
-By default, edge insertions are preferential attachment. But it can be
-set to ER if you give "-imode 0" to the program.
-The program outputs to standard output.
+By default, edge insertions are preferential attachment. But it can be set to ER if you give "-imode 0" to the program. The program outputs to standard output.
 
 === GRAPH EXTRACTORS ===
 
   * graphExtractorFromPairs
-Given a timestamp sorted edge lists (each line has 2 nodes), it creates a gra file with first n lines and convert the remaining
-list into "add node" updates.
+Given a timestamp sorted edge lists (each line has 2 nodes), it creates a gra file with first n lines and convert the remaining list into "add node" updates.
 
 Example Usage :
 {{{./graphExtractorFromPairs -g abc.text -n 10000000}}}
 
-It will create abc.text.gra with first 10M lines of abc.text
-and the remaining lines will be converted to update
-operations written in abc.text.gra.up
+It will create abc.text.gra with first 10M lines of _abc.text_ and the remaining lines will be converted to update operations written in _abc.text.gra.up_
 
    * graphExtractor
 Given an update list, it creates a gra file with first n line.
 Example Usage:
 {{{./graphExtractor -g abc.text -n 1000 -t outfile.gra}}}
 
-The output gra is saved into outfile.gra
+The output gra is saved into _outfile.gra_
