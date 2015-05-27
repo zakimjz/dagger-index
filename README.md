@@ -4,7 +4,7 @@ Automatically exported from code.google.com/p/dagger-index
 # DAGGER: Reachability Index for Dynamic Graphs #
 This software is a C++ implementation of the methods proposed in the paper:
 
-> Hilmi Yildirim, Vineet Chaoji and Mohammed J. Zaki : "_DAGGER: A Scalable Index for Reachability Queries in Large Dynamic Graphs_", , CoRR (Arxiv) abs/1301.0977, 2013 (http://arxiv.org/abs/1301.0977).
+> Hilmi Yildirim, Vineet Chaoji and Mohammed J. Zaki : "_DAGGER: A Scalable Index for Reachability Queries in Large Dynamic Graphs_", CoRR (Arxiv) abs/1301.0977, 2013 (http://arxiv.org/abs/1301.0977).
 
 Please cite the papers if you use the software for academic purposes. You can download the whole package from [Downloads](http://code.google.com/p/dagger-index/downloads/list) or svn checkout from [Source](http://code.google.com/p/dagger-index/source/checkout) tab.
 
